@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://f04j3kghhjwh"]
+
+[ext_resource type="Script" uid="uid://dboj81yp6qn0h" path="res://activity_button.gd" id="1_1texe"]
+[ext_resource type="Texture2D" uid="uid://b27kvyio0vee3" path="res://images/cannon01a(smaller_scale).png" id="2_40hb0"]
+[ext_resource type="PackedScene" uid="uid://bw7qjsw1xnlvj" path="res://scene/turret_1.tscn" id="3_vbivn"]
+
+[node name="ActivityButton" type="Button"]
+custom_minimum_size = Vector2(96, 96)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -48.0
+offset_top = -96.0
+offset_right = 48.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("1_1texe")
+activity_button_icon = ExtResource("2_40hb0")
+activity_draggable = ExtResource("3_vbivn")
+
+[connection signal="button_down" from="." to="." method="_on_button_down"]
+[connection signal="button_up" from="." to="." method="_on_button_up"]
