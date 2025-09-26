@@ -1,5 +1,5 @@
 extends Node3D
-#tefstdgay
+#toeireoijwaoigjsflökjflsdfükjgapjgöpvdw
 @export var enemy_settings:EnemySettings
 
 var attackable:bool = false
