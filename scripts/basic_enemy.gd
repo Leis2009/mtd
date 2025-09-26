@@ -1,9 +1,5 @@
 extends Node3D
-<<<<<<< HEAD
-#haölpo sjfdaklkagjhoöJKJASLRHKJPFHKSHTNCD 
-=======
-
->>>>>>> f49812f0e26f53f5d1eab3e96bca7ab0ba32292c
+#haölpo sjfdaklk
 @export var enemy_settings:EnemySettings
 
 var attackable:bool = false
