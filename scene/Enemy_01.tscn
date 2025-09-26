@@ -1,0 +1,124 @@
+[gd_scene load_steps=12 format=3 uid="uid://c7lbqcbwo310g"]
+
+[ext_resource type="Script" uid="uid://chd58cdhiy2oj" path="res://scripts/basic_enemy.gd" id="1_vg76x"]
+[ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="2_8t0kt"]
+[ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="3_watjr"]
+[ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="4_c3052"]
+[ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="5_in0qg"]
+[ext_resource type="PackedScene" uid="uid://do5lnir5o5py8" path="res://assets/assets_terrain/enemy-ufo-d.glb" id="6_6vos2"]
+
+[sub_resource type="Animation" id="Animation_et32v"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Path3D/PathFollow3D/enemy-ufo-d2:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_qg4c3"]
+resource_name = "despawn"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Path3D/PathFollow3D/enemy-ufo-d2:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_pc74v"]
+resource_name = "spawn"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Path3D/PathFollow3D/enemy-ufo-d2:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qg4c3"]
+_data = {
+&"RESET": SubResource("Animation_et32v"),
+&"despawn": SubResource("Animation_qg4c3"),
+&"spawn": SubResource("Animation_pc74v")
+}
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_rvtsa"]
+height = 0.75
+
+[node name="Enemy_01" type="Node3D"]
+script = ExtResource("1_vg76x")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_qg4c3")
+}
+
+[node name="EnemyStateChart" type="Node" parent="."]
+script = ExtResource("2_8t0kt")
+metadata/_custom_type_script = "uid://couw105c3bde4"
+
+[node name="CompoundState" type="Node" parent="EnemyStateChart"]
+script = ExtResource("3_watjr")
+initial_state = NodePath("Spawning")
+
+[node name="Spawning" type="Node" parent="EnemyStateChart/CompoundState"]
+script = ExtResource("4_c3052")
+
+[node name="ToTravelling" type="Node" parent="EnemyStateChart/CompoundState/Spawning"]
+script = ExtResource("5_in0qg")
+to = NodePath("../../Travelling")
+event = &"to_travelling"
+delay_in_seconds = "0.0"
+
+[node name="Travelling" type="Node" parent="EnemyStateChart/CompoundState"]
+script = ExtResource("4_c3052")
+
+[node name="ToDespawning" type="Node" parent="EnemyStateChart/CompoundState/Travelling"]
+script = ExtResource("5_in0qg")
+to = NodePath("../../Despawning")
+event = &"to_despawning"
+delay_in_seconds = "0.0"
+
+[node name="Despawning" type="Node" parent="EnemyStateChart/CompoundState"]
+script = ExtResource("4_c3052")
+
+[node name="Dying" type="Node" parent="EnemyStateChart/CompoundState"]
+script = ExtResource("4_c3052")
+metadata/_custom_type_script = "uid://cytafq8i1y8qm"
+
+[node name="Path3D" type="Path3D" parent="."]
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
+loop = false
+
+[node name="enemy-ufo-d2" parent="Path3D/PathFollow3D" instance=ExtResource("6_6vos2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+
+[node name="Area3D" type="Area3D" parent="Path3D/PathFollow3D"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Path3D/PathFollow3D/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("CylinderShape3D_rvtsa")
+
+[connection signal="state_entered" from="EnemyStateChart/CompoundState/Spawning" to="." method="_on_spawning_state_entered"]
+[connection signal="state_processing" from="EnemyStateChart/CompoundState/Travelling" to="." method="_on_travelling_state_processing"]
+[connection signal="state_entered" from="EnemyStateChart/CompoundState/Despawning" to="." method="_on_despawning_state_entered"]

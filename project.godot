@@ -1,0 +1,42 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Tower Defense"
+run/main_scene="uid://bv3jv3fa7xrli"
+config/features=PackedStringArray("4.4", "Forward Plus")
+config/icon="res://icon.svg"
+
+[autoload]
+
+PathGenInstance="*res://scripts/path_generator.gd"
+
+[editor]
+
+version_control/plugin_name="GitPlugin"
+version_control/autoload_on_startup=true
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/godot-git-plugin/plugin.cfg", "res://addons/godot_state_charts/plugin.cfg")
+
+[global_group]
+
+grid_tree=""
+grid_tree_double=""
+path=""
+grid_rock=""
+grid_empty=""
+
+[layer_names]
+
+3d_physics/layer_1="Path"
+3d_physics/layer_2="Enemy"

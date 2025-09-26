@@ -1,0 +1,46 @@
+[gd_scene load_steps=13 format=3 uid="uid://bv3jv3fa7xrli"]
+
+[ext_resource type="Script" uid="uid://c6t2odlkgkbsv" path="res://scene/main.gd" id="1_v0l8b"]
+[ext_resource type="PackedScene" uid="uid://dh6jprxy7378x" path="res://scene/tile_spawn_end_round.tscn" id="2_tqoya"]
+[ext_resource type="PackedScene" uid="uid://bsyvjdu7ige06" path="res://scene/tile_straight.tscn" id="3_k65ib"]
+[ext_resource type="PackedScene" uid="uid://dbik43qkvrl87" path="res://scene/tile_corner_round.tscn" id="4_wscrc"]
+[ext_resource type="PackedScene" uid="uid://b8ibxoh73ilww" path="res://scene/tile_crossing.tscn" id="5_mswub"]
+[ext_resource type="PackedScene" uid="uid://c7lbqcbwo310g" path="res://scene/Enemy_01.tscn" id="6_k65ib"]
+[ext_resource type="PackedScene" uid="uid://bgda5yta8ufut" path="res://scene/tile_rock.tscn" id="7_hybxs"]
+[ext_resource type="PackedScene" uid="uid://cof5aar7dmu2" path="res://scene/tile_tree.tscn" id="8_v2gmf"]
+[ext_resource type="PackedScene" uid="uid://b4ehqhjxwcbmb" path="res://scene/tile_tree_double.tscn" id="9_jcbur"]
+[ext_resource type="PackedScene" uid="uid://bon48dyseyqpi" path="res://scene/tile_empty.tscn" id="10_smf0o"]
+[ext_resource type="PackedScene" uid="uid://f04j3kghhjwh" path="res://scene/activity_button.tscn" id="11_wscrc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mswub"]
+
+[node name="main" type="Node3D"]
+script = ExtResource("1_v0l8b")
+tile_start = ExtResource("2_tqoya")
+tile_end = ExtResource("2_tqoya")
+tile_straight = ExtResource("3_k65ib")
+tile_corner = ExtResource("4_wscrc")
+tile_crossroads = ExtResource("5_mswub")
+tile_enemy = ExtResource("6_k65ib")
+tile_empty = Array[PackedScene]([ExtResource("7_hybxs"), ExtResource("8_v2gmf"), ExtResource("9_jcbur"), ExtResource("10_smf0o"), ExtResource("10_smf0o"), ExtResource("10_smf0o"), ExtResource("10_smf0o"), ExtResource("10_smf0o"), ExtResource("10_smf0o"), ExtResource("10_smf0o")])
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.422618, 0.906308, 0, -0.906308, 0.422618, 8, 8.351, 9.6)
+fov = 60.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.799517, 0.600644, 0, -0.600644, 0.799517, 0, 4.08005, 9.68645)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 547.0
+offset_top = 590.0
+offset_right = 587.0
+offset_bottom = 630.0
+
+[node name="ActivityButton" parent="Control" instance=ExtResource("11_wscrc")]
+layout_mode = 1
+theme_override_styles/focus = SubResource("StyleBoxEmpty_mswub")
