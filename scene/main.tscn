@@ -47,4 +47,4 @@ layout_mode = 1
 theme_override_styles/focus = SubResource("StyleBoxEmpty_mswub")
 
 [node name="Player_def" parent="." instance=ExtResource("12_wscrc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 5, 5)
