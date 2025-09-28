@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bv3jv3fa7xrli"]
+[gd_scene load_steps=14 format=3 uid="uid://bv3jv3fa7xrli"]
 
 [ext_resource type="Script" uid="uid://c6t2odlkgkbsv" path="res://scene/main.gd" id="1_v0l8b"]
 [ext_resource type="PackedScene" uid="uid://dh6jprxy7378x" path="res://scene/tile_spawn_end_round.tscn" id="2_tqoya"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://b4ehqhjxwcbmb" path="res://scene/tile_tree_double.tscn" id="9_jcbur"]
 [ext_resource type="PackedScene" uid="uid://bon48dyseyqpi" path="res://scene/tile_empty.tscn" id="10_smf0o"]
 [ext_resource type="PackedScene" uid="uid://f04j3kghhjwh" path="res://scene/activity_button.tscn" id="11_wscrc"]
+[ext_resource type="PackedScene" uid="uid://cw6jrm4lh0fht" path="res://scene/player_def.tscn" id="12_wscrc"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mswub"]
 
@@ -44,3 +45,6 @@ offset_bottom = 630.0
 [node name="ActivityButton" parent="Control" instance=ExtResource("11_wscrc")]
 layout_mode = 1
 theme_override_styles/focus = SubResource("StyleBoxEmpty_mswub")
+
+[node name="Player_def" parent="." instance=ExtResource("12_wscrc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
