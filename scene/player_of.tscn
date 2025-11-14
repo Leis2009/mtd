@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://rdwu6cnumjyp"]
+
+[node name="player_of" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.422618, 0.906308, 0, -0.906308, 0.422618, 8, 8.351, 9.6)
+fov = 60.0
