@@ -10,9 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://cof5aar7dmu2" path="res://scene/tile_tree.tscn" id="8_v2gmf"]
 [ext_resource type="PackedScene" uid="uid://b4ehqhjxwcbmb" path="res://scene/tile_tree_double.tscn" id="9_jcbur"]
 [ext_resource type="PackedScene" uid="uid://bon48dyseyqpi" path="res://scene/tile_empty.tscn" id="10_smf0o"]
-[ext_resource type="PackedScene" uid="uid://f04j3kghhjwh" path="res://scene/activity_button.tscn" id="11_wscrc"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mswub"]
+[ext_resource type="PackedScene" uid="uid://cw6jrm4lh0fht" path="res://scene/player_def.tscn" id="12_wscrc"]
+[ext_resource type="PackedScene" uid="uid://rdwu6cnumjyp" path="res://scene/player_of.tscn" id="13_mswub"]
 
 [node name="main" type="Node3D"]
 script = ExtResource("1_v0l8b")
@@ -24,23 +23,7 @@ tile_crossroads = ExtResource("5_mswub")
 tile_enemy = ExtResource("6_k65ib")
 tile_empty = Array[PackedScene]([ExtResource("7_hybxs"), ExtResource("8_v2gmf"), ExtResource("9_jcbur"), ExtResource("10_smf0o"), ExtResource("10_smf0o"), ExtResource("10_smf0o"), ExtResource("10_smf0o"), ExtResource("10_smf0o"), ExtResource("10_smf0o"), ExtResource("10_smf0o")])
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.422618, 0.906308, 0, -0.906308, 0.422618, 8, 8.351, 9.6)
-fov = 60.0
+[node name="Player_def" parent="." instance=ExtResource("12_wscrc")]
+transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 10, 0.5, 5)
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.799517, 0.600644, 0, -0.600644, 0.799517, 0, 4.08005, 9.68645)
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 547.0
-offset_top = 590.0
-offset_right = 587.0
-offset_bottom = 630.0
-
-[node name="ActivityButton" parent="Control" instance=ExtResource("11_wscrc")]
-layout_mode = 1
-theme_override_styles/focus = SubResource("StyleBoxEmpty_mswub")
+[node name="player_of" parent="." instance=ExtResource("13_mswub")]
