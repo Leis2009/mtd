@@ -17,6 +17,9 @@ var RAYCAST_LENGTH:float = 100
 func _ready():
 	_complete_grid()
 	
+	if Input.is_action_pressed("exit"):
+		get_tree().quit()
+	
 	##Gegner Spawn (temp)
 	#for i in range(10):
 		#await get_tree().create_timer(2.275).timeout
