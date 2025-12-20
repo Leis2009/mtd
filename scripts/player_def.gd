@@ -15,13 +15,13 @@ const JUMP_VELOCITY = 4.5
 
 func _physics_process(delta: float) -> void:
 	
-	## Add the gravity.
-	#if not is_on_floor():
-		#velocity += get_gravity() * delta
-		#
-	## Handle jump.
-	#if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		#velocity.y = JUMP_VELOCITY
+	# Add the gravity.
+	if not is_on_floor():
+		velocity += get_gravity() * delta
+		
+	# Handle jump.
+	if Input.is_action_just_pressed("jump") and is_on_floor():
+		velocity.y = JUMP_VELOCITY
 	
 	# Get the input direction and handle the movement/deceleration.
 	var input_dir := Input.get_vector("move_left", "move_right", "move_forwards", "move_backwards")
@@ -59,7 +59,7 @@ func _physics_process(delta: float) -> void:
 	
 	# Spieler bewegen
 	velocity = velo
-	move_and_slide()
+	
 
 func _input(event):
 	if event.is_action_pressed("exit"):
